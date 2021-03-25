@@ -20,7 +20,8 @@ const SudokuSolver = () => {
     const { x, y } = emptyCell.position;
 
     for (let i = 1; i < 10; i++) {
-      if (checkIfValid(board, i, { x, y })) {
+      const isValid = checkIfValid(board, i, { x, y });
+      if (isValid) {
         const newBoard = setValueToCell(board, i, { x, y });
         setBoard(newBoard);
 

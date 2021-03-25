@@ -11,11 +11,11 @@ export const checkIfValid = (board, value, position) => {
   const { x, y } = position;
 
   for (let index = 0; index < board[0].length; index++) {
-    if (board[y][index] === value && index !== x) return false;
+    if (board[y][index].number === value && index !== x) return false;
   }
 
   for (let index = 0; index < board.length; index++) {
-    if (board[index][x] === value && index !== y) return false;
+    if (board[index][x].number === value && index !== y) return false;
   }
 
   const boxX = Math.floor(x / 3);
@@ -23,7 +23,7 @@ export const checkIfValid = (board, value, position) => {
 
   for (let i = boxY * 3; i < boxY * 3 + 3; i++)
     for (let j = boxX * 3; j < boxX * 3 + 3; j++)
-      if (board[i][j] === value && i !== y && j !== x) return false;
+      if (board[i][j].number === value && i !== y && j !== x) return false;
 
   return true;
 };
