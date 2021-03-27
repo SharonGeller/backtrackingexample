@@ -7,16 +7,23 @@ import {
   findEmptyCell,
   setValueToCell,
 } from "../../utils/sudoku-solver-helper";
+import sleep from "../../utils/sleep";
 
 const SudokuSolver = () => {
   const classes = useStyles();
 
   const [board, setBoard] = useState(createBoard(9));
 
-  const solveBoard = () => {
+  const resetBoard = () => {
+    const newBoard = createBoard(9);
+    setBoard(newBoard);
+  };
+
+  const solveBoard = async () => {
     const emptyCell = findEmptyCell(board);
     if (!emptyCell) return true;
 
+    await sleep(2000);
     const { x, y } = emptyCell.position;
 
     for (let i = 1; i < 10; i++) {
@@ -45,6 +52,14 @@ const SudokuSolver = () => {
         onClick={solveBoard}
       >
         solve
+      </Button>
+      <Button
+        className={classes.button}
+        color={"secondary"}
+        variant={"contained"}
+        onClick={resetBoard}
+      >
+        reset
       </Button>
     </Box>
   );

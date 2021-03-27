@@ -34,3 +34,10 @@ export const setValueToCell = (board, value, { x, y }) => {
 
   return newBoard;
 };
+
+export const setColorToCell = (board, color, { x, y }) => {
+  let newBoard = [...board];
+  newBoard[y][x].color = color;
+
+  return newBoard;
+};

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     backgroundColor: "#282c34",
     width: "100%",
     height: "100vh",
-    overflow: "hidden",
+    overflow: "auto",
   },
 });
 
