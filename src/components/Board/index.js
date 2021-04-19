@@ -4,11 +4,10 @@ import Cell from "../Cell";
 
 const Board = ({ board, setBoard }) => {
   const classes = useStyles();
-
   const handleCellValueChange = (value, { x, y }) => {
     const tempBoard = [...board];
 
-    if (value.length === 1) tempBoard[y][x].number = value;
+    if (value.length === 1) tempBoard[y][x].number = parseInt(value);
     setBoard(tempBoard);
   };
 
@@ -23,6 +22,7 @@ const Board = ({ board, setBoard }) => {
                   postion={cell.position}
                   handleValueChange={handleCellValueChange}
                   value={cell.number}
+                  color={cell.color}
                 />
               </Box>
             );

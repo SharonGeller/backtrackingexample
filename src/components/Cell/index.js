@@ -1,22 +1,27 @@
 import React from "react";
 import { makeStyles, Box, Input } from "@material-ui/core";
 
-const Cell = ({ value, postion, handleValueChange }) => {
+const Cell = ({ value, postion, handleValueChange, color }) => {
   const classes = useStyles();
 
+  const getColor = () => {
+    const colors = {
+      default: "grey",
+      selected: "green",
+    };
+
+    return { backgroundColor: colors[color] };
+  };
+
   return (
-    <Box className={classes.continer}>
-      <Box className={classes.continer}>
-        <Input
-          type={"number"}
-          className={classes.text}
-          disableUnderline
-          value={value}
-          onChange={({ target: { value } }) =>
-            handleValueChange(value, postion)
-          }
-        />
-      </Box>
+    <Box className={classes.continer} style={getColor()}>
+      <Input
+        type={"number"}
+        className={classes.text}
+        disableUnderline
+        value={value}
+        onChange={({ target: { value } }) => handleValueChange(value, postion)}
+      />
     </Box>
   );
 };
@@ -27,15 +32,7 @@ const useStyles = makeStyles({
     height: "100%",
     display: "flex",
     alignItems: "center",
-
-    backgroundColor: "grey",
     borderStyle: "solid",
-  },
-  center: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
   },
   text: {
     marginLeft: "30px",

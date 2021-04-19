@@ -35,6 +35,20 @@ export const setValueToCell = (board, value, { x, y }) => {
   return newBoard;
 };
 
+export const setSelectedCell = (board, { x, y }) => {
+  let newBoard = [...board];
+  newBoard[y][x].color = "selected";
+
+  return newBoard;
+};
+
+export const setUnselectedCell = (board, { x, y }) => {
+  let newBoard = [...board];
+  newBoard[y][x].color = "default";
+
+  return newBoard;
+};
+
 export const setColorToCell = (board, color, { x, y }) => {
   let newBoard = [...board];
   newBoard[y][x].color = color;
