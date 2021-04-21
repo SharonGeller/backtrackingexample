@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { makeStyles, Box, Button, Slider } from "@material-ui/core";
 import Board from "../../components/Board";
+import Panel from "../../components/Panel";
 import createBoard from "../../utils/board-creator";
 import {
   checkIfValid,
@@ -18,12 +19,14 @@ const SudokuSolver = () => {
   const [board, setBoard] = useState(createBoard(9));
   const [steps, setSteps] = useState();
   const [speed, setSpeed] = useState(200);
+  const [isSolved, setIsSolved] = useState(false);
   const speedRef = useRef(200);
 
   const resetBoard = (e) => {
     e.stopPropagation();
     const newBoard = createBoard(9);
     setBoard(newBoard);
+    setIsSolved(false);
     setSteps([1]);
   };
 
@@ -59,6 +62,7 @@ const SudokuSolver = () => {
     solveBoard(currentBoard, currnetSteps);
     setBoard(currentBoard);
     setSteps(currnetSteps);
+    setIsSolved(true);
   };
 
   const handlePlayClick = async () => {
@@ -79,37 +83,14 @@ const SudokuSolver = () => {
   return (
     <Box className={classes.continer}>
       <Board board={board} setBoard={setBoard} />
-      <Button
-        className={classes.button}
-        color={"primary"}
-        variant={"contained"}
-        onClick={handleSolveClick}
-      >
-        solve
-      </Button>
-      <Button
-        className={classes.button}
-        color={"primary"}
-        variant={"contained"}
-        onClick={handlePlayClick}
-      >
-        play
-      </Button>
-      <Slider
-        className={classes.slider}
-        value={speed}
-        min={1}
-        max={2000}
-        onChange={hanleSpeedChange}
+      <Panel
+        handleSolveClick={handleSolveClick}
+        handlePlayClick={handlePlayClick}
+        hanleSpeedChange={hanleSpeedChange}
+        resetBoard={resetBoard}
+        speed={speedRef.current}
+        isSolved={isSolved}
       />
-      <Button
-        className={classes.button}
-        color={"secondary"}
-        variant={"contained"}
-        onClick={resetBoard}
-      >
-        reset
-      </Button>
     </Box>
   );
 };
