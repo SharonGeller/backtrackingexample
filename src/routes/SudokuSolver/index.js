@@ -21,9 +21,10 @@ const SudokuSolver = () => {
   const [speed, setSpeed] = useState(200);
   const [isSolved, setIsSolved] = useState(false);
   const speedRef = useRef(200);
+  const isPlaying = useRef(false);
 
   const resetBoard = (e) => {
-    e.stopPropagation();
+    isPlaying.current = false;
     const newBoard = createBoard(9);
     setBoard(newBoard);
     setIsSolved(false);
@@ -67,8 +68,11 @@ const SudokuSolver = () => {
 
   const handlePlayClick = async () => {
     const allSteps = deepCopy(steps);
+    isPlaying.current = true;
 
     for (let i = 0; i < allSteps.length; i++) {
+      if (!isPlaying.current) return;
+
       setBoard(allSteps[i]);
       console.log(speed);
       await sleep(speedRef.current);
